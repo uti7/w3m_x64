@@ -1,0 +1,2 @@
+PATH=$PATH:/bin:/cygdrive/c/cast/app/bin:/cygdrive/c/progra~2/mecab/bin
+export PATH
