@@ -1,0 +1,29 @@
+#!/bin/sh
+echo "mecab wrapper for cygwin"
+#  で終了できないためラップ
+
+mecab='/cygdrive/c/progra~2/mecab/bin/mecab.exe'
+
+x="文章を入力"
+
+while [ 0 ]
+do
+	echo "CURRENT: $x"
+	echo -n "ENTER japanese text (mode:<$mode>: [d]ump, or [q]uit):"
+	read t
+
+	if [ "$t" = "d" ]; then
+		if [ "$mode" = "" ]; then
+			mode=" -Odump"
+		else
+			mode=""
+		fi
+		t=""
+		continue
+	elif [ "$t" = "q" ]; then
+		break
+	fi
+	[ "$t" != "" ] && x="$t"
+	echo "$x" |  $mecab $mode
+done
+exit 0
