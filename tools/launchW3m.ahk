@@ -3,7 +3,7 @@
 ; w3mが使えれば起動、そうでなければlynxを起動
 ; オプション  /std or -std をつけると標準のブラウザで
 ; w3mを使う場合は mintty.exe > ck.exe の順に探し見つかったターミナルで開く
-; mintty+w3mだと表が崩れるのでβ版(?) 2014-05-31
+; mintty+w3mだと表が崩れるのでβ版(?) 2014-05-31 ←意味不明（2020-10-19）
 
 w3mdir := A_ScriptDir
 bindir := w3mdir . "\bin"
@@ -44,7 +44,7 @@ If(RegExMatch(isStandard, "^[/-]std$")){
 		; cyg path 表記の fileスキームをwin path 表記に
 		url := RegExReplace(url, "i)^(file:\/\/\/)cygdrive\/(\w)\/", "$1$2:/")
 
-		If(RegExMatch(url, "^https?:\/\/")){
+		If(RegExMatch(url, "^(https?|file):\/\/")){
 			; マイナスを \- とエスケープしている？＞w3mからextenal browser時
 			; ならば\ を消す
 			url := RegExReplace(url, "\\", "")
