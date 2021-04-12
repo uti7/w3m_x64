@@ -2,7 +2,11 @@
 echo "mecab wrapper for cygwin"
 #  で終了できないためラップ
 
-mecab='/cygdrive/c/progra~2/mecab/bin/mecab.exe'
+if [ -d /cygdrive ]; then
+  mecab='/cygdrive/c/progra~2/mecab/bin/mecab.exe'
+else
+  mecab='/c/progra~2/mecab/bin/mecab.exe'
+fi
 
 x="文章を入力"
 
