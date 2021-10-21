@@ -1,21 +1,24 @@
 #NoTrayIcon
 #NoEnv
-; w3mが使えれば起動、そうでなければlynxを起動
-; オプション  /std or -std をつけると標準のブラウザで
-; w3mを使う場合は mintty.exe > ck.exe の順に探し見つかったターミナルで開く
-; mintty+w3mだと表が崩れるのでβ版(?) 2014-05-31 ←意味不明（2020-10-19）
+; w3m-portableでURLを開く
+; Usage: this.exe URL [/std]
+; オプション  /std or -std をつけると標準のブラウザで開く
+; w3mの外部ブラウザ設定欄に次のように指定する
+;   /launchW3m.exe "%s" /std
 
 w3mdir := A_ScriptDir
 bindir := w3mdir . "\bin"
 homedir := w3mdir . "\cyghome"
 clTerminal := bindir . "\mintty.exe"
 
+minttyCaption = w3m-portable
 ;cygw3mdir := win2cygpath(w3mdir)
 ;cygbindir := win2cygpath(bindir)
 
 ;terminalconf := cygw3mdir . "/.minttyrc"
 ;terminaloptions = -c  %terminalconf% -t w3m -h error -w normal -e
-terminaloptions = -t w3m -h error -w normal -i %A_ScriptName% -e
+
+terminaloptions = -t %minttyCaption% -h error -w normal -i %A_ScriptName% -e
 shcygexe := "sh"
 w3mcygexe := "w3m"
 
@@ -36,7 +39,7 @@ IfNotExist, %clTerminal%
 	isStandard := "-std"
 }
 
-; w3m から 外部ブラウザ（標準ブラウザ）で開く場合
+; w3m から 外部ブラウザ（標準ブラウザ）で開く要求の場合
 If(RegExMatch(isStandard, "^[/-]std$")){
 	If(url = ""){
 		url = http://www.google.co.jp
@@ -71,6 +74,21 @@ STYLE := "Normal"
 ;msgbox, %clTerminal% %terminaloptions% %clW3m%, %w3mdir%
 ;Clipboard = %clTerminal% %terminaloptions% %clW3m%
 
+; 既にw3mが存在する場合はそこで開く
+SendMode,Input
+
+IfWinExist, %minttyCaption% ahk_class mintty
+{
+  WinActivate
+  WinWaitActive, %minttyCaption% ahk_class mintty,, 2
+  If ErrorLevel = 0
+  {
+    SendRaw, U%url%
+    Send, {Enter}
+    Return
+  }
+  OutputDebug, %A_ScriptName%: WinWaitActive: timed out.
+}
 Run, %clTerminal% %terminaloptions% %clW3m%, %w3mdir%, %STYLE%
 
 /*
