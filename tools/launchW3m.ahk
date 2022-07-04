@@ -83,8 +83,13 @@ IfWinExist, %minttyCaption% ahk_class mintty
   WinWaitActive, %minttyCaption% ahk_class mintty,, 2
   If ErrorLevel = 0
   {
-    SendRaw, U%url%
-    Send, {Enter}
+    If(url = "-B"){
+      Send, {Esc}b
+    }
+    Else{
+      SendRaw, U%url%
+      Send, {Enter}
+    }
     Return
   }
   OutputDebug, %A_ScriptName%: WinWaitActive: timed out.
