@@ -72,7 +72,7 @@
 
 ## Remarks
 
-- Only when the terminal is Ck used
+- Only when the terminal is Ck used  
 When the display is shifted due to the ambiguous width problem (of some
 characters in Unicode).
 If it is drawn with a half-width width, there will be no deviation, but
@@ -85,7 +85,7 @@ if it is not clear in .Xdefaults
 If you increase the space between lines like this, the misalignment may
 be eliminated even if the display is full-width.
 
-- Only if the terminal is mintty used
+- Only if the terminal is mintty used  
 When only mintty.exe is started, bash + w3m window (so-called mintty
 screen) and mintty's own console window is displayed separately (this is
 cmd.exe's Similar to windows. input is not accepted).
