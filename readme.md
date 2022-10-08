@@ -46,7 +46,7 @@
 
 - External Program Settings
 
-	- Edior  
+	- Editor  
 		`cygstart /cygdrive/c/cast/app/gvim64/gvim.exe \`cygpath -ad "%s"\` `
 
 	- External Browser  
