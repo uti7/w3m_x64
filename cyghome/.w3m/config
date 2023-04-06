@@ -124,7 +124,7 @@ display_image 1
 view_unseenobject 0
 ignore_null_img_alt 1
 display_ins_del 1
-fold_textarea 0
+fold_textarea 1
 graphic_char 2
 alt_entity 1
 multicol 0

@@ -15,10 +15,7 @@ minttyCaption = w3m-portable
 ;cygw3mdir := win2cygpath(w3mdir)
 ;cygbindir := win2cygpath(bindir)
 
-;terminalconf := cygw3mdir . "/.minttyrc"
-;terminaloptions = -c  %terminalconf% -t w3m -h error -w normal -e
-
-terminaloptions = -t %minttyCaption% -h error -w normal -i %A_ScriptName% -e
+terminaloptions = --position right -t %minttyCaption% -h error -w normal -i %A_ScriptName% -e
 shcygexe := "sh"
 w3mcygexe := "w3m"
 
