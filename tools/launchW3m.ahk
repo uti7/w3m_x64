@@ -84,7 +84,8 @@ IfWinExist, %minttyCaption% ahk_class mintty
       Send, {Esc}b
     }
     Else{
-      SendRaw, U%url%
+      Send, U^u
+      SendRaw, %url%
       Send, {Enter}
     }
     Return
