@@ -1,11 +1,13 @@
 #!/bin/sh
 echo "mecab wrapper for cygwin"
-#  で終了できないためラップ
+# wrap mecab due to it is not terminated with CTRL+D
 
 if [ -d /cygdrive ]; then
   mecab='/cygdrive/c/progra~2/mecab/bin/mecab.exe'
+  opt=
 else
   mecab='/c/progra~2/mecab/bin/mecab.exe'
+  opt='--rcfile=c:\progra~2\mecab\etc\mecabrc'
 fi
 
 x="文章を入力"
@@ -28,6 +30,8 @@ do
 		break
 	fi
 	[ "$t" != "" ] && x="$t"
-	echo "$x" |  $mecab $mode
+  # FIXME: if used in MSYS2 environment, character display will be distorted. Therefore, output it to a file and cat it.
+	echo "$x" |  $mecab "$opt" $mode 1> /tmp/meca.tmp
+  [ -r /tmp/meca.tmp ] && cat /tmp/meca.tmp
 done
 exit 0
