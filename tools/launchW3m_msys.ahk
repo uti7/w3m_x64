@@ -45,8 +45,8 @@ If(RegExMatch(isStandard, "^[/-]std$")){
 	If(url = ""){
 		url = http://www.google.co.jp
 	}Else{
-		; replace the file scheme in cyg-path notation with windows-path notation.
-		url := RegExReplace(url, "i)^(file:\/\/\/)cygdrive\/(\w)\/", "$1$2:/")
+		; replace the file scheme in msys-path notation with windows-path notation.
+		url := RegExReplace(url, "i)^(file:\/\/\/)(\w)\/", "$1$2:/")
 
 		If(RegExMatch(url, "^(https?|file):\/\/")){
 			; if hyphens are being escaped like "\-" when launching the external browser from w3m, stop doing that
@@ -65,7 +65,7 @@ If(url = ""){
 	url := "-B"
 }Else{
 	; substitute cyg-path with windows-path
-	url := win2cygpath(url)
+	url := win2msyspath(url)
 }
 StringReplace, clW3m, clW3m, _CYGPATH_, '%url%', All
 STYLE := "Normal"
@@ -96,9 +96,9 @@ Run, %clTerminal% %terminaloptions% %clW3m%, %w3mdir%, %STYLE%
 
 Return
 
-win2cygpath(path)
+win2msyspath(path)
 {
-	ret := RegExReplace(path, "i)^([a-z]):", "/cygdrive/$1")
+	ret := RegExReplace(path, "i)^([a-z]):", "/$1")
 	ret := RegExReplace(ret, "\\", "/")
 	StringReplace, ret, ret, %A_Space%, \%A_Space%, All
 	Return, ret
