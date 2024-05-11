@@ -50,7 +50,7 @@ If(RegExMatch(isStandard, "^[/-]std$")){
 
 		If(RegExMatch(url, "^(https?|file):\/\/")){
 			; if hyphens are being escaped like "\-" when launching the external browser from w3m, stop doing that
-			url := RegExReplace(url, "\\", "")
+			url := RegExReplace(url, "(\\|/)-", "-")
 		}
 		
 	}
