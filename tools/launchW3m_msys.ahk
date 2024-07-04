@@ -52,7 +52,7 @@ If(RegExMatch(isStandard, "^[/-]std$")){
 			; if hyphens are being escaped like "\-" when launching the external browser from w3m, stop doing that
 			url := RegExReplace(url, "(\\|/)-", "-")
 			url := RegExReplace(url, "\\([&=?%])", "$1")
-			url := RegExReplace(url, "/([#%=])", "$1")
+			url := RegExReplace(url, "/([@#%=])", "$1")
 		}
 		
 	}
